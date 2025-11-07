@@ -6,50 +6,23 @@ import { Spinner } from "@/components/utilities-components/Spinner.js";
 const routes = [
   // ======== Panel principal ========
   {
-    path: "/",
+    path: "/dashboard",
     component: lazy(() => import("@/views/DashboardView.js")),
     roles: [],
   },
 
   // ======== Gestión de Roles ========
-  {
-    path: "/rol",
-    component: lazy(() => import("@/views/adminPanel/TableRoleView.js")),
-    roles: [],
-  },
-  {
-    path: "/rol/create",
-    component: lazy(() => import("@/views/adminPanel/CreateRol.js")),
-    roles: [],
-  },
-  {
-    path: "/rol/edit/:id", // 
-    component: lazy(() => import("@/views/adminPanel/EditRolView.js")),
-    roles: [],
-  },
+  {path: "/rol",component: lazy(() => import("@/views/adminPanel/TableRoleView.js")),roles: [],},
+  {path: "/rol/create",component: lazy(() => import("@/views/adminPanel/CreateRol.js")),roles: [],},
+  {path: "/rol/edit/:id", component: lazy(() => import("@/views/adminPanel/EditRolView.js")),roles: [],},
 
   // ======== Gestión de Usuarios ========
-  {
-    path: "/user",
-    component: lazy(() => import("@/views/adminPanel/TableUserView.js")),
-    roles: [],
-  },
-  {
-    path: "/user/create", // corregido: apuntar a la vista, no al componente
-    component: lazy(() => import("@/views/adminPanel/CreateUserView.js")),
-    roles: [],
-  },
+  {path: "/user",component: lazy(() => import("@/views/adminPanel/TableUserView.js")),roles: [],},
+  {path: "/user/create", component: lazy(() => import("@/views/adminPanel/CreateUserView.js")),roles: [],},
 
   // ======== Gestión de Citas ========
-  {
-    path: "/appointments/create",
-    component: lazy(() => import("@/views/appointments/CreateAppointmentsView.js")),
-    roles: [],
-  },
-  {
-    path: "/appointments/:appointmentId",
-    component: lazy(() => import("@/views/appointments/AppointmentDetailsView.js")),
-    roles: [],
+  {path: "/appointments/create",component: lazy(() => import("@/views/appointments/CreateAppointmentsView.js")),roles: [],},
+  {path: "/appointments/:appointmentId",component: lazy(() => import("@/views/appointments/AppointmentDetailsView.js")),roles: [],
   },
   {
     path: "/appointments/:appointmentId/edit",
@@ -58,16 +31,11 @@ const routes = [
   },
 
   // ======== Gestión de Productos ========
-  {
-    path: "/services",
-    component: lazy(() => import("@/views/Services.js")),
-    roles: [],
-  },
-  {
-    path: "/services/create",
-    component: lazy(() => import("@/views/legalServices/CreateServicesView.js")),
-    roles: [],
-  },
+  {path: "/services",component: lazy(() => import("@/views/legalServices/TableServices.js")),roles: [],},
+  {path: "/services/create",component: lazy(() => import("@/views/legalServices/CreateServicesView.js")),roles: [],},
+  {path: "/categories",component: lazy(() => import("@/views/legalServices/TableCategories.js")),roles: [],},
+  {path: "/categories/create",component: lazy(() => import("@/views/legalServices/CreateServiceCategory.js")),roles: [],},
+
 ];
 
 export default function AdminRoutes() {

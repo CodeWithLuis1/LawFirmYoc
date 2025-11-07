@@ -15,7 +15,6 @@ export default function CrearRolForm({ register, errors }: RolFormProps) {
           Nombre del Rol
           <span className="required">*</span>
         </label>
-
         <div className="input-icon-wrapper">
           <path
             strokeLinecap="round"

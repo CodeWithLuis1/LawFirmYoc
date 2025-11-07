@@ -1,5 +1,5 @@
 import { z } from "zod";
-
+import { paginationSchema } from "@/schemas/paginateSchemas.js";
 //login
 export const loginRequestSchema = z.object({
   username: z.string(),
@@ -17,15 +17,14 @@ export const loginResponseSchema = z.object({
 export type LoginRequest = z.infer<typeof loginRequestSchema>;
 export type LoginResponse = z.infer<typeof loginResponseSchema>;
 
-//rol
+//role
 export const createRolSchema = z.object({
-  name: z.string().min(1, "El nombre del rol es obligatorio"),
+  name: z.string()
 });
 export const rolSchema = z.object({
   id: z.number(),
   name: z.string(),
 });
-
 export const getRoleSchema = z.object({
   statusCode: z.number(),
   response: z.array(rolSchema),
@@ -33,18 +32,55 @@ export const getRoleSchema = z.object({
   total: z.number(),
   lastPage: z.number(),
 });
+export const backendSuccessSchema = z
+  .object({
+    statusCode: z.number(),
+    message: z.string(),
+    data: z
+      .object({
+        id: z.number(),
+        name: z.string(),
+      })
+      .loose()
+      .optional(),
+  })
+  .loose();
 
 
+export const backendErrorSchema = z.object({
+  error: z.string(),
+});
 export type GetRolesResponse = z.infer<typeof getRoleSchema>;
 export type Rol = z.infer<typeof rolSchema>;
 export type CreateRolFormData = z.infer<typeof createRolSchema>;
+export type BackendSuccess = z.infer<typeof backendSuccessSchema>;
+export type BackendError = z.infer<typeof backendErrorSchema>;
 
-// crete user
-export const createUserSchema = z.object({
+// ===========================
+// USERS
+// ===========================
+export const userSchema = z.object({
+  id: z.number(),
   name: z.string(),
   username: z.string(),
   password: z.string(),
-  rol_id: z.number()
-});
+  roleId: z.number(),
+  createdAt: z.coerce.date(),
+  role:createRolSchema
+})
+export const userListItemSchema = (
+  userSchema.pick({
+    id: true,
+    name: true,
+    username: true,
+    password: true,
+    roleId: true,
+    createdAt: true,
+    role:true
+  })
+)
+export const getUserSchema = paginationSchema(userListItemSchema)
 
-export type createUserFormData = z.infer<typeof createUserSchema>
+export type User = z.infer<typeof userSchema>
+export type UserFormData = Pick<User, "name" | "username" | "password" | "roleId">
+export type GetUserResponse = z.infer<typeof getUserSchema>

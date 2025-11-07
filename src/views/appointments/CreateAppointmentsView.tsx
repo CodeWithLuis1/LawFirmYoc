@@ -25,7 +25,7 @@ export default function CreateAppointmentsView() {
     }, //this error comes from the api
     onSuccess: (response) => {
       toast.success(response);
-      navigate("/"); //This will redirect to the home page after creating the appointment
+      navigate("/dashboard"); //This will redirect to the home page after creating the appointment
     },
   });
 
@@ -41,7 +41,7 @@ export default function CreateAppointmentsView() {
         <nav className="my-5">
           <Link
             className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
-            to="/"
+            to="/dashboard"
           >
             Volver a citas
           </Link>

@@ -50,10 +50,10 @@ export default function LoginView() {
                 <TrendingUp className="w-8 h-8 text-white" />
               </div>
               <h1 className="text-2xl font-bold text-white tracking-tight mb-1">
-                Panino Divino App
+                YOCK Y ASOCIADOS
               </h1>
               <p className="text-slate-300 text-sm font-medium">
-                “Donde el pan cruje y el sabor conquista.”
+                “Defendemos tus derechos con compromiso, ética y resultados.”
               </p>
             </div>
           </div>
@@ -145,7 +145,7 @@ export default function LoginView() {
         </div>
 
         <p className="text-center text-sm text-slate-500 mt-6">
-          © 2025 Panino Divino App. Todos los derechos reservados.
+          © 2025 Yoc && Asociados App. Todos los derechos reservados.
         </p>
       </div>
     </div>

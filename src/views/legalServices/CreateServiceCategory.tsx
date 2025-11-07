@@ -1,48 +1,41 @@
-import type { CreateRolFormData } from "../../schemas/typesAdmin.js";
-import { useMutation } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import {serviceCategoryAPI} from "@/api/ServiceCategory.js";
 import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import CrearRolForm from "@/components/adminPanel/CreateRolForm.js";
-import { createRoleAPI } from "@/api/RoleAPI.js";
+import { useForm } from "react-hook-form";
+import type {ServiceCategoryFormData} from "@/schemas/types.js";
+import { useMutation } from "@tanstack/react-query";
+import ServiceCategoryForm from "@/components/services/ServiceCategoryForm.js";
 
-export default function CreateRol() {
+export default function CreateProductCategories() {
   const navigate = useNavigate();
-  const initialValues: CreateRolFormData = { name: "" };
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<CreateRolFormData>({
-    defaultValues: initialValues,
-    mode: "onChange",
-  });
-
-  const { mutate } = useMutation({
-    mutationFn: createRoleAPI,
-    onError: (error: any) => toast.error(error.message),
-    onSuccess: (response) => {
-      toast.success(response.message || "Rol creado correctamente");
-      reset(); // limpiar campo
-      setTimeout(() => navigate("/rol"), 800);
+  const initialValues: ServiceCategoryFormData = {id_category:0,  name:""};
+  const {register,handleSubmit,formState: {errors}} = useForm({defaultValues:initialValues});
+  
+  const {mutate} = useMutation({
+    mutationFn: serviceCategoryAPI,
+    onError: (error)=>{
+      toast.error(error.message);
     },
-  });
+    onSuccess:(data)=>{
+      toast.success(data.message);
+      navigate("/categories");
+    }
+  })
 
-  const handleForm = (data: CreateRolFormData) => mutate(data);
-
+  const handleForm = async (formData: ServiceCategoryFormData) =>{mutate(formData)}
+  
   return (
     <div className="min-h-screen bg-[var(--color-bg-primary)] py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] bg-clip-text text-transparent mb-3">
-            Crear Nuevo Rol
+            Crear Nueva Categoría
           </h1>
         </div>
 
         <div className="mb-6">
           <Link
-            to="/rol"
+            to="/categories"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white text-[var(--color-primary-dark)] font-semibold rounded-xl shadow-md hover:shadow-lg hover:bg-[var(--color-bg-secondary)] transition-all duration-200 border border-[var(--color-border-light)]"
           >
             <svg
@@ -69,20 +62,21 @@ export default function CreateRol() {
             onSubmit={handleSubmit(handleForm)}
             noValidate
           >
-            <CrearRolForm register={register} errors={errors} />
+            <ServiceCategoryForm register={register} errors={errors} />
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-[var(--color-primary-dark)] to-[var(--color-primary)] hover:from-[var(--color-primary-darker)] hover:to-[var(--color-primary-dark)] text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-[var(--shadow-amber)] transform hover:-translate-y-0.5 transition-all duration-200 uppercase tracking-wide"
             >
-              Crear Rol
+              Crear Categoría
             </button>
           </form>
         </div>
 
         <div className="mt-6 text-center text-sm text-[var(--color-text-tertiary)]">
-          <p>Los cambios se aplicarán inmediatamente después de crear el rol</p>
+          <p>Los cambios se aplicarán inmediatamente después crear la Categoría</p>
         </div>
       </div>
     </div>
   );
 }
+

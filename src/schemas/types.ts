@@ -1,4 +1,5 @@
-import { string, z } from "zod";
+import { number, string, z } from "zod";
+import { paginationSchema } from "@/schemas/paginateSchemas.js";
 
 export const appointmentSchema = z.object({
   id: z.number(),
@@ -28,36 +29,6 @@ export type AppointmentFormData = Pick<
   "clientName" | "clientEmail" | "clientPhone" |"appointmentDate" |"appointmentTime" |"reason"
 >;
 
-// Schema Services
-export const ServicesSchema = z.object({
-  id: z.number(),
-  name: z.string(),
-  category: z.string(),
-  price: z.string(),
-  duration: string(),
-  description: string(),
-  status: string()
-});
-
-export const tableServicesSchema = z.array(
-  appointmentSchema.pick({
-  id: true,
-  name: true,
-  category: true,
-  price: true,
-  duration: true,
-  description: true,
-  status: true,
-  })
-);
-export type Service = z.infer<typeof ServicesSchema>;
-export type servicesFormData = Pick<
-  Service,
-  "name" | "category" | "price" |"duration" |"description" |"status"
->;
-//NoteModal
-
-
 // Enum for task status
 export const taskStatusSchema = z.enum([
   "pendiente",
@@ -68,7 +39,6 @@ export const taskStatusSchema = z.enum([
 ])
 
 //Tasks
-// Full schema representing a task in the database or API response
 export const taskSchema = z.object({
   id: z.number(),
   name: z.string(),
@@ -84,6 +54,48 @@ export const taskCreateSchema = z.object({
   status: taskStatusSchema.optional().default("pendiente")
 })
 
-// TypeScript types
 export type TaskFormData = z.infer<typeof taskSchema>
 export type TaskCreateData = z.infer<typeof taskCreateSchema>
+
+//services categories
+export const servicesCategorySchema = z.object({
+  id_category: z.number(),
+  name: z.string(),
+})
+export const serviceCategoriesList=(
+  servicesCategorySchema.pick({
+    id_category:true,
+    name:true,
+  })
+)
+export const getCategoriesSchema = paginationSchema(serviceCategoriesList)
+export type Category = z.infer<typeof servicesCategorySchema>;
+export type ServiceCategoryFormData = Pick<Category, "id_category"|"name" >;
+
+// Schema Services
+export const ServicesSchema = z.object({
+  id_service: z.number(),
+  name: z.string(),
+  id_category: z.number(),
+  price: z.string().transform((val) => parseFloat(val)),
+  duration: z.number(),
+  description: z.string(),
+  status: z.boolean(),
+  category: servicesCategorySchema
+});
+
+export const tableServicesSchema = (
+  ServicesSchema.pick({
+  id: true,
+  name: true,
+  category: true,
+  price: true,
+  duration: true,
+  description: true,
+  status: true,
+  })
+);
+export const getServicesSchema = paginationSchema(tableServicesSchema);
+export type GetServiceFormData = z.infer<typeof getServicesSchema>;
+export type Service = z.infer<typeof ServicesSchema>;
+export type servicesFormData = Pick<Service,"name" | "id_category" | "price" |"duration" |"description" |"status">;

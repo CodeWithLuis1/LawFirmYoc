@@ -74,10 +74,10 @@ export default function Header({
             </div>
             <div className="hidden sm:block">
               <h1 className="text-lg font-bold text-white tracking-tight">
-                Panino Divino
+                YOCK Y ASOCIADOS
               </h1>
               <p className="text-xs text-slate-400 font-medium">
-                “Donde el pan cruje y el sabor conquista.”
+                 “Defendemos tus derechos con compromiso, ética y resultados.”
               </p>
             </div>
           </div>

@@ -1,267 +1,29 @@
 @import "tailwindcss";
-/* ============================================
-   LEGUMEX APPS - SISTEMA DE DISEÑO CSS
-   Colores y estilos para formularios y tablas
-   ============================================ */
 
 /* === VARIABLES DE COLOR === */
 :root {
-  /* Colores principales */
   --color-primary: #f59e0b;
   --color-primary-dark: #d97706; 
   --color-primary-darker: #ea580c; 
   --color-primary-light: #fbbf24; 
-  
-  /* Colores de fondo */
+
   --color-bg-primary: #f8fafc; 
   --color-bg-secondary: #f1f5f9; 
   --color-bg-tertiary: #e2e8f0; 
-  
-  /* Colores de texto */
+
   --color-text-primary: #0f172a;
   --color-text-secondary: #334155; 
   --color-text-tertiary: #64748b; 
   --color-text-light: #94a3b8;
-  
-  /* Colores de bordes */
+
   --color-border: #cbd5e1; 
   --color-border-light: #e2e8f0; 
-  
-  /* Sombras */
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
   --shadow-amber: 0 10px 15px -3px rgba(245, 158, 11, 0.3);
-}
-
-/* ============================================
-   FORMULARIOS
-   ============================================ */
-
-/* Contenedor principal del formulario */
-.form-container {
-  background: white;
-  border-radius: 1rem;
-  box-shadow: var(--shadow-xl);
-  border: 1px solid var(--color-border-light);
-  padding: 2rem;
-}
-
-/* Header del formulario */
-.form-header {
-  background: linear-gradient(to right, #0f172a, #1e293b, #0f172a);
-  padding: 2.5rem 2rem;
-  border-radius: 1rem 1rem 0 0;
-  margin: -2rem -2rem 2rem -2rem;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.form-header::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom right, rgba(100, 116, 139, 0.1), rgba(71, 85, 105, 0.1));
-}
-
-.form-header-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 0.25rem;
-  position: relative;
-  z-index: 1;
-}
-
-.form-header-subtitle {
-  color: #cbd5e1;
-  font-size: 0.875rem;
-  font-weight: 500;
-  position: relative;
-  z-index: 1;
-}
-
-/* Grupos de campos */
-.form-group {
-  margin-bottom: 1.5rem;
-}
-
-.form-label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-secondary);
-  margin-bottom: 0.5rem;
-}
-
-.form-label-required::after {
-  content: '*';
-  color: #dc2626;
-  margin-left: 0.25rem;
-}
-
-/* Inputs */
-.form-input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
-  background-color: white;
-  transition: all 0.2s ease;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  ring: 2px;
-  ring-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-}
-
-.form-input::placeholder {
-  color: var(--color-text-light);
-}
-
-.form-input:disabled {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-tertiary);
-  cursor: not-allowed;
-}
-
-/* Input con icono */
-.form-input-wrapper {
-  position: relative;
-}
-
-.form-input-icon {
-  position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-text-light);
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
-.form-input-with-icon {
-  padding-left: 3rem;
-}
-
-/* Select */
-.form-select {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
-  background-color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.form-select:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-}
-
-/* Textarea */
-.form-textarea {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--color-border);
-  border-radius: 0.5rem;
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
-  background-color: white;
-  resize: vertical;
-  min-height: 100px;
-  transition: all 0.2s ease;
-}
-
-.form-textarea:focus {
-  outline: none;
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1);
-}
-
-/* Botones */
-.btn {
-  padding: 0.875rem 1.5rem;
-  border-radius: 0.75rem;
-  font-weight: 600;
-  font-size: 0.875rem;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  border: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.btn-primary {
-  background: linear-gradient(to right, var(--color-primary), var(--color-primary-dark), var(--color-primary-darker));
-  color: white;
-  box-shadow: var(--shadow-amber);
-}
-
-.btn-primary:hover {
-  box-shadow: 0 20px 25px -5px rgba(245, 158, 11, 0.4);
-  transform: scale(1.02);
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
-}
-
-.btn-secondary {
-  background: white;
-  color: var(--color-text-secondary);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
-}
-
-.btn-secondary:hover {
-  background: var(--color-bg-primary);
-  border-color: var(--color-text-light);
-}
-
-.btn-danger {
-  background: linear-gradient(to right, #dc2626, #b91c1c);
-  color: white;
-  box-shadow: 0 10px 15px -3px rgba(220, 38, 38, 0.3);
-}
-
-.btn-danger:hover {
-  box-shadow: 0 20px 25px -5px rgba(220, 38, 38, 0.4);
-  transform: scale(1.02);
-}
-
-.btn-success {
-  background: linear-gradient(to right, #16a34a, #15803d);
-  color: white;
-  box-shadow: 0 10px 15px -3px rgba(22, 163, 74, 0.3);
-}
-
-.btn-success:hover {
-  box-shadow: 0 20px 25px -5px rgba(22, 163, 74, 0.4);
-  transform: scale(1.02);
-}
-
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-  transform: none !important;
-}
-
-.btn-full {
-  width: 100%;
 }
 
 /* ============================================
@@ -279,8 +41,8 @@
 
 /* Header de la tabla */
 .table-header {
-  background: linear-gradient(to right, #0f172a, #1e293b, #0f172a);
-  padding: 1.5rem 2rem;
+  background: linear-gradient(to right, #005fa3, #004080, #001f40);
+  padding: 1rem 1rem;
   position: relative;
   overflow: hidden;
 }
@@ -297,7 +59,7 @@
   font-weight: 700;
   color: white;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 /* Tabla */
@@ -424,35 +186,8 @@
 }
 
 /* ============================================
-   UTILIDADES
+   MEDIA QUERIES
    ============================================ */
-
-/* Espaciado */
-.mb-4 { margin-bottom: 1rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.mt-4 { margin-top: 1rem; }
-.mt-6 { margin-top: 1.5rem; }
-
-/* Grid de formularios */
-.form-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.form-grid-2 {
-  grid-template-columns: repeat(2, 1fr);
-}
-
-.form-grid-3 {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-@media (max-width: 768px) {
-  .form-grid-2,
-  .form-grid-3 {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* Tabla responsive */
 @media (max-width: 768px) {
@@ -463,4 +198,145 @@
   .table {
     min-width: 600px;
   }
+}
+
+/* Corrige superposición y define estilo del Link */
+.table-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom right, rgba(100, 116, 139, 0.1), rgba(71, 85, 105, 0.1));
+  pointer-events: none; /* No bloquea clics */
+}
+
+.table-header * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Botón principal (Link) */
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  box-shadow: var(--shadow-amber);
+  transform: scale(1.05);
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary-darker));
+}
+
+/* ============================================
+   Forms
+   ============================================ */
+/* Contenedor general de formulario con separación vertical */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* space-y-6 */
+}
+
+/* Contenedor de cada campo individual */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* space-y-2 */
+}
+
+/* Etiqueta de campo */
+.form-label {
+  display: block;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 600; /* font-semibold */
+  color: var(--color-text-primary);
+  margin-bottom: 0.5rem;
+}
+
+/* Indicador de campo obligatorio */
+.required {
+  color: var(--color-primary);
+  margin-left: 0.25rem; /* ml-1 */
+}
+
+/* Contenedor para icono dentro del input */
+.input-icon-wrapper {
+  position: relative;
+}
+
+.input-icon-wrapper svg {
+  position: absolute;
+  inset-y: 0;
+  left: 1rem; /* pl-4 */
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  height: 1.25rem; /* h-5 */
+  width: 1.25rem; /* w-5 */
+  color: var(--color-text-light);
+}
+
+/* Input estándar */
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 3rem; /* py-3.5, pl-12, pr-4 */
+  border-width: 2px;
+  border-radius: 1rem; /* rounded-xl */
+  transition: all 0.2s;
+  outline: none;
+  background-color: white;
+  color: var(--color-text-primary);
+  placeholder-color: var(--color-text-light);
+}
+
+/* Input en estado normal */
+.form-input-normal {
+  border-color: var(--color-border);
+}
+
+.form-input-normal:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 0.25rem var(--color-primary-light)33; /* focus:ring */
+}
+
+/* Input con error */
+.form-input-error {
+  border-color: #fca5a5; /* red-300 */
+}
+
+.form-input-error:focus {
+  border-color: #ef4444; /* red-500 */
+  box-shadow: 0 0 0 0.25rem #fee2e2; /* red-100 ring */
+}
+
+/* Mensaje de error */
+.error-message-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+
+/* Texto de ayuda o descripción */
+.help-text {
+  font-size: 0.75rem; /* text-xs */
+  color: var(--color-text-tertiary);
+  margin-top: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.help-text svg {
+  width: 1rem; /* w-4 */
+  height: 1rem; /* h-4 */
 }
