@@ -4,6 +4,7 @@ import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {GetServiceAPI} from "@/api/ServicesAPI.js"
+import type { Service } from "@/schemas/types.js";
 
 
 export default function TableService() {
@@ -37,20 +38,35 @@ export default function TableService() {
                 <thead>
                   <tr>
                     <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Duración(Meses)</th>
+                    <th>Descripción</th>
+                    <th>Estado</th>
                     <th>Categoría</th>
                     <th>Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {services.map((service) => (
+                  {services.map((service: Service) => (
                     <tr key={service.id_service}>
                       <td>{service.id_service}</td>
                       <td>{service.name}</td>
-                      <td>{service.id_category}</td>
                       <td>{service.price}</td>
                       <td>{service.duration}</td>
                       <td>{service.description}</td>
-                      <td>{service.status}</td>
+                      <td>
+                        <span
+                          className={`px-3 py-1 text-sm font-semibold rounded-full ${
+                            service.status
+                              ? "bg-green-100 text-green-700 border border-green-400"
+                              : "bg-red-100 text-red-700 border border-red-400"
+                          }`}
+                        >
+                          {service.status ? "Activo" : "Inactivo"}
+                        </span>
+                      </td>
+                      <td>{service.category?.name??"Sin categoría"}</td>
                       <td>
                         <div className="table-actions justify-center">
                           <button

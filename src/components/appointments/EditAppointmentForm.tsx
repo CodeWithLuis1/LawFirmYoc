@@ -53,7 +53,7 @@ export default function EditAppointmentForm({
         queryKey: ["editAppointment", appointmentId],
       }); //we get the appointmentId from EditAppointmentView.tsx
       toast.success("Cita actualizada correctamente");
-      navigate("/");
+      navigate("/dashboard");
     },
   });
 
@@ -76,7 +76,7 @@ export default function EditAppointmentForm({
         <nav className="my-5">
           <Link
             className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
-            to="/"
+            to="/dashboard"
           >
             Volver a citas
           </Link>

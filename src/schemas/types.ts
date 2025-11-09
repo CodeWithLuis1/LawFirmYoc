@@ -24,38 +24,58 @@ export const dashboardAppointmentSchema = z.array(
 );
 export type Appointment = z.infer<typeof appointmentSchema>;
 
-export type AppointmentFormData = Pick<
-  Appointment,
-  "clientName" | "clientEmail" | "clientPhone" |"appointmentDate" |"appointmentTime" |"reason"
+export type AppointmentFormData = Pick<Appointment,"clientName" | "clientEmail" | "clientPhone" |"appointmentDate" |"appointmentTime" |"reason"
 >;
 
-// Enum for task status
+
+//Tasks
+// ✅ Enumeración de estados de tarea válidos (según backend)
 export const taskStatusSchema = z.enum([
   "pendiente",
   "en_proceso",
   "completada",
+  "cancelada",
   "retrasada",
-  "cancelada"
-])
+]);
 
-//Tasks
+// ✅ Schema para crear una tarea (lo que se envía desde el frontend)
+export const taskCreateSchema = z.object({
+  name: z.string().min(3, "El nombre es obligatorio"),
+  description: z.string().min(5, "La descripción es obligatoria"),
+  status: taskStatusSchema.default("pendiente"),
+});
+
+// ✅ Schema para validar una tarea completa (lo que el backend retorna)
 export const taskSchema = z.object({
   id: z.number(),
   name: z.string(),
   description: z.string(),
+  status: taskStatusSchema,
   appointmentId: z.number(),
-  status: taskStatusSchema
-})
+  createdAt: z.string().datetime(),
+  updatedAt: z.string().datetime(),
+  appointment: z
+    .object({
+      id: z.number(),
+      clientName: z.string(),
+      clientEmail: z.string(),
+      clientPhone: z.string(),
+      appointmentDate: z.string(),
+      appointmentTime: z.string(),
+      reason: z.string(),
+    })
+    .optional(), // el backend puede o no incluirlo
+});
 
-// Schema for creating a task (appointmentId is in the URL, not in the body)
-export const taskCreateSchema = z.object({
-  name: z.string(),
-  description: z.string(),
-  status: taskStatusSchema.optional().default("pendiente")
-})
+//  Schema para validar una lista de tareas
+export const getTasksSchema = z.object({
+  data: z.array(taskSchema),
+});
 
-export type TaskFormData = z.infer<typeof taskSchema>
-export type TaskCreateData = z.infer<typeof taskCreateSchema>
+// Tipos derivados
+export type Task = z.infer<typeof taskSchema>;
+export type TaskFormData = z.infer<typeof taskSchema>;
+export type TaskCreateData = z.infer<typeof taskCreateSchema>;
 
 //services categories
 export const servicesCategorySchema = z.object({
@@ -81,21 +101,24 @@ export const ServicesSchema = z.object({
   duration: z.number(),
   description: z.string(),
   status: z.boolean(),
-  category: servicesCategorySchema
+  category: servicesCategorySchema,
 });
 
-export const tableServicesSchema = (
-  ServicesSchema.pick({
-  id: true,
+export const tableServicesSchema = ServicesSchema.pick({
+  id_service: true,
   name: true,
-  category: true,
   price: true,
   duration: true,
   description: true,
   status: true,
-  })
-);
+  category: true,
+});
 export const getServicesSchema = paginationSchema(tableServicesSchema);
+
+// Tipos
 export type GetServiceFormData = z.infer<typeof getServicesSchema>;
 export type Service = z.infer<typeof ServicesSchema>;
-export type servicesFormData = Pick<Service,"name" | "id_category" | "price" |"duration" |"description" |"status">;
+export type servicesFormData = Pick<
+  Service,
+  "name" | "id_category" | "price" | "duration" | "description" | "status"
+>;

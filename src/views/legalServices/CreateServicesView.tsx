@@ -10,11 +10,11 @@ export default function CreateServicesView() {
   const navigate = useNavigate();
   const initialValues: servicesFormData = {
     name: "",
-    category: "",
-    price: "",
-    duration: "",
+    id_category: 0,
+    price: 0,
+    duration: 0,
     description: "",
-    status: "",
+    status: true,
   };
   const {
     register,
@@ -31,7 +31,7 @@ export default function CreateServicesView() {
       toast.error(error.message);
     }, //this error comes from the api
     onSuccess: (response) => {
-      toast.success(response);
+      toast.success(response.message);
       navigate("/services"); //This will redirect to the home page after creating the appointment
     },
   });

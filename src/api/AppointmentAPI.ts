@@ -100,7 +100,7 @@ export async function getServices() {
     }
 }
 
-export async function getServicesById(id: Service['id']) {
+export async function getServicesById(id: Service['id_service']) {
     try {
         const {data} = await api(`/services/${id}`)
           return data; 
@@ -112,31 +112,3 @@ export async function getServicesById(id: Service['id']) {
     }
 }
 
-type ServicesAPIType = {
-    formData: servicesFormData,
-    appointmentId: Service ['id']
-}
-
-export async function updateServices({formData, appointmentId}: ServicesAPIType) {
-    try {
-        const {data} = await api.put(`/services/${appointmentId}`,formData)
-          return data; 
-    } catch (error) {
-        if(isAxiosError(error) && error.response){
-            throw new Error(error.response.data.error)
-        }
-    }
-}
-
-export async function deleteServices(id: Service['id']) {
-    try {
-        const url = `/services/${id}`
-        const {data} = await api.delete<string>(url)
-          return data; 
-
-    } catch (error) {
-        if(isAxiosError(error) && error.response){
-            throw new Error(error.response.data.error)
-        }
-    }
-}

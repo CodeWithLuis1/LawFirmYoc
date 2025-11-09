@@ -11,10 +11,7 @@ type CreateUserFormProps = {
   errors: FieldErrors<UserFormData>;
 };
 
-export default function CreateUserForm({
-  register,
-  errors,
-}: CreateUserFormProps) {
+export default function CreateUserForm({register,errors,}: CreateUserFormProps) {
   
   const [roles, setRoles] = useState<Rol[]>([]);
   const [loadingRoles, setLoadingRoles] = useState<boolean>(true);
