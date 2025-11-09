@@ -40,7 +40,7 @@ export default function TableService() {
                     <th>Id</th>
                     <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Duración(Meses)</th>
+                    <th>Duración(Semanas)</th>
                     <th>Descripción</th>
                     <th>Estado</th>
                     <th>Categoría</th>
